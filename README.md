@@ -1,6 +1,8 @@
 # Super Mario Galaxy Paint
 A paint program based on Super Mario Galaxy
 
+[Try live demo](https://zzakiull.bitbucket.io/super-mario-galaxy-paint)
+
 ## Installation
 
 ### Dependencies
