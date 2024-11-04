@@ -15,10 +15,15 @@ init()
 #root.withdraw() 
 
 # font for labels
-calibriSmall = font.SysFont("Calibri", 14)
-calibriNorm = font.SysFont("Calibri", 16)
-calibriBig = font.SysFont("Calibri", 18)
-calibriBold = font.SysFont("Calibri", 18, True)
+##calibriSmall = font.SysFont("Calibri", 14)
+##calibriNorm = font.SysFont("Calibri", 16)
+##calibriBig = font.SysFont("Calibri", 18)
+##calibriBold = font.SysFont("Calibri", 18, True)
+
+calibriSmall = font.SysFont("Calibri", 12)
+calibriNorm = font.SysFont("Calibri", 14)
+calibriBig = font.SysFont("Calibri", 14)
+calibriBold = font.SysFont("Calibri", 14)
 
 screen = display.set_mode((1200, 700))
 
@@ -36,9 +41,6 @@ myStart = my              # even starts
 spacePic = image.load("Pictures/Backgrounds/Screen-background.jpg")
 origSmgLogo = image.load("Pictures/Other/SMG-logo.png")
 paintPic = image.load("Pictures/Other/Paint-logo.png")
-# NOTE FOR paintPic ^
-# I couldn't load this font even after downloading it, so I just did the "Paint"
-# title separately on PowerPoint and saved it as a picture
 
 orig_mario_paint = image.load("Pictures/Other/Mario-painting.png")
 orig_babyLuma_paint = image.load("Pictures/Other/Luma-painting.png")
@@ -692,6 +694,8 @@ playing = True  # flag for when music is playing (as opposed being paused)
 mute = False
 
 mixer.music.load("Music/"+songs[songPos]+".ogg")
+MUSIC_END = USEREVENT + 1
+mixer.music.set_endevent(MUSIC_END)
 mixer.music.play()
 
 
@@ -856,7 +860,7 @@ async def main():
     global checkmark, cancel, nxtBkrdRect, checkRect, cancelRect, prvBkrdRect, bRects, oldTool, colour, paletteRect
     global palette, customClrRect, spectrum, spectrum, moreTxt, clrRectCopy, rgbIcon, rgbIcon, rgbAreaCopy, posIcon
     global posIcon, posAreaCopy, finding, neighbours, newPts, finding, np, deleting
-    global finding, star, starEye, star, starEye, fillStar, songs, songNames, songPos, playing
+    global finding, star, starEye, star, starEye, fillStar, songs, songNames, songPos, playing, MUSIC_END
     global mute, click, playIcon, pauseIcon, playNextIcon, playPreviousIcon, muteIcon, vlmIcon, speakerIcon, playIcon
     global pauseIcon, playNextIcon, playPreviousIcon, muteIcon, highVlmIcon, mediumVlmIcon, lowVlmIcon, speakerIcon, speakerRect, speakerRectEmpty
     global speakerRectCopy, vlm, vlmTxtRect, vlmTxtRectCopy, vlmTxt, playPreviousRect, playRect, playNextRect, vlmRect, playPreviousRectCopy
@@ -885,6 +889,11 @@ async def main():
                     sizeUp = True
                 elif e.button == 5:
                     sizeDown = True
+
+            if e.type == MUSIC_END:
+                songPos = ((songPos + 1) % len(songs))
+                mixer.music.load("Music/"+songs[songPos]+".ogg")
+                mixer.music.play()
             
             if e.type == QUIT:
                 running = False
@@ -1064,14 +1073,14 @@ async def main():
             mixer.music.pause()
         else:
             mixer.music.unpause()
-        
-        if mixer.music.get_busy() == False:
-            if songPos < len(songs) - 1:
-                songPos += 1
-            else:
-                songPos = 0
-            mixer.music.load("Music/"+songs[songPos]+".ogg")
-            mixer.music.play()
+
+##        if mixer.music.get_busy() == False:
+##            if songPos < len(songs) - 1:
+##                songPos += 1
+##            else:
+##                songPos = 0
+##            mixer.music.load("Music/"+songs[songPos]+".ogg")
+##            mixer.music.play()
 
         
         if playNextRect.collidepoint(mx, my):

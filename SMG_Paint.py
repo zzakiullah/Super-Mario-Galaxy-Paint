@@ -512,7 +512,7 @@ fifthSqr = Rect(1099, 463, 82, 82)
 squares = [firstSqr, secondSqr, thirdSqr, fourthSqr, fifthSqr]
 
 # loading the power-ups (the images along the bottom of the canvas)
-resetIcon = image.load("Pictures/Power-Ups/reset.png")
+resetIcon = image.load("Pictures/Power-Ups/Reset.png")
 dashPepper = image.load("Pictures/Power-Ups/Dash-pepper.png")
 beeMushroom = image.load("Pictures/Power-Ups/Bee-mushroom.png")
 booMushroom = image.load("Pictures/Power-Ups/Boo-mushroom.png")
@@ -553,7 +553,7 @@ riding = False  # flag to see whether Mario is riding Yoshi or not
 
 
 # choosing a background
-backgroundIcon = image.load("Pictures/Other/Background.png")
+backgroundIcon = image.load("Pictures/Other/background.png")
 backgroundIcon = transform.scale(backgroundIcon, (54, 54))
 screen.blit(backgroundIcon,(1112, 602))
 chooseTxt = calibriNorm.render("Choose", True, (255, 255, 255))
@@ -639,7 +639,7 @@ rgbIcon = transform.scale(rgbIcon, (16, 16))
 rgbAreaCopy = screen.subsurface(507, 592, 186, 18).copy()
 
 # area below the canvas that gives the mouse position
-posIcon = image.load("Pictures/Other/Position.png")
+posIcon = image.load("Pictures/Other/position.png")
 posIcon = transform.scale(posIcon, (9, 16))
 screen.blit(posIcon, (120, 592))
 posAreaCopy = screen.subsurface(120, 592, 200, 18).copy()
@@ -1991,7 +1991,7 @@ while running:
         screen.blit(toolInfo, (15+(250-toolInfo.get_width())//2, 38))
         screen.blit(noLumaSpeech, (905, 15))
         draw.rect(screen, (255, 255, 255), (rectRect), 1)
-    if tool == "rectangle":
+    elif tool == "rectangle":
         draw.rect(screen, (255, 255, 255), (rectRect), 1)
     else:
         if shapeFormat == "no fill":
